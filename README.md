@@ -43,8 +43,8 @@ To run this project, install the dependencies and the requirements.
 
 #### tkinter
 Install [tkinter](https://docs.python.org/3/library/tkinter.html "docs") for your operating system:  
-  
-  
+
+
 **Debian:**
 
     sudo apt-get install python3-tk
@@ -52,11 +52,11 @@ Install [tkinter](https://docs.python.org/3/library/tkinter.html "docs") for you
 **Fedora**
 
     sudo dnf install python3-tkinter
- 
+
 **Arch**
 
     sudo pacman -Syu tk
- 
+
 **etc...**  
 
 #### pyperclip
@@ -70,6 +70,7 @@ Install [tkinter](https://docs.python.org/3/library/tkinter.html "docs") for you
 
 ### Requirements
 Install the requirements:  
+
     pip3 install -r requirements
 
 ### Usage
