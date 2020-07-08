@@ -18,7 +18,7 @@ if sys.platform == "win32":
 
 options = {
     'build_exe': {
-        'include_files':[
+        'include_files': [
             os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tk86t.dll'),
             os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tcl86t.dll'),
          ],
@@ -26,7 +26,7 @@ options = {
 }
 
 
-setup(  name = "Copy-Anything",
+setup(name = "Copy-Anything",
         version = "0.1",
         description = "Copy paste anything!",
         options = {"build_exe": build_exe_options},

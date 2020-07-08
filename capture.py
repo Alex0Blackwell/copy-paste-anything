@@ -1,7 +1,8 @@
-import pyautogui, pyperclip, convert
+import pyautogui
+import pyperclip
+import convert
 from tkinter import *
 
-import datetime
 
 class Application():
     """
@@ -21,8 +22,9 @@ class Application():
         self.curY   = None
 
         root.attributes("-alpha", 1)
-        root.geometry('200x50+200+200')  # set window dimensions
+        root.geometry('250x50+100+100')  # set window dimensions
         root.title('Copy')
+        root.iconbitmap('./.images/copy_paste_icon.ico')
         self.menu_frame = Frame(master, bg="#4a4a4a")
         self.menu_frame.pack(fill=BOTH, expand=YES)
 
@@ -30,7 +32,7 @@ class Application():
         self.buttonBar.pack(fill=BOTH,expand=YES)
 
 
-        self.snipButton = Button(self.buttonBar, text='Clip', width=3, command=self.createScreenCanvas, background="#5a6778")
+        self.snipButton = Button(self.buttonBar, text='Clip', width=5, command=self.createScreenCanvas, background="#5a6778")
         self.snipButton.pack(expand=YES)
 
         self.master_screen = Toplevel(root)
@@ -67,7 +69,6 @@ class Application():
         self.screenCanvas.bind("<B1-Motion>", self.on_move_press)            # mouse drag
         self.screenCanvas.bind("<ButtonRelease-1>", self.on_button_release)  # left release
 
-
         self.master_screen.attributes('-fullscreen', True)
         self.master_screen.attributes('-alpha', .2)
         self.master_screen.lift()
@@ -88,7 +89,6 @@ class Application():
         self.startY = self.screenCanvas.canvasy(event.y)
 
         self.rect = self.screenCanvas.create_rectangle(self.x, self.y, 1, 1, outline='#dbf3ff', width=2)
-
 
 
     def on_move_press(self, event):

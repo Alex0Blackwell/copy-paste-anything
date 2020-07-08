@@ -1,4 +1,5 @@
 # Copy-Paste Anything
+![](./.images/copy_paste_icon.ico)
 
 ## Table of contents
 * [Overview](#overview)
