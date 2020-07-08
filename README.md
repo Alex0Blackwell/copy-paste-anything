@@ -41,23 +41,10 @@ Often, tutorials contain text that must be copied out line by line. This program
 To run this project, install the dependencies and the requirements.  
 ### Dependencies
 
-#### tkinter
-Install [tkinter](https://docs.python.org/3/library/tkinter.html "docs") for your operating system:  
-
-
-**Debian:**
-
-    sudo apt-get install python3-tk
-
-**Fedora**
-
-    sudo dnf install python3-tkinter
-
-**Arch**
-
-    sudo pacman -Syu tk
-
-**etc...**  
+#### tesseract
+If you are on a *windows* computer, you need to install the command line program [tesseract](https://github.com/tesseract-ocr/tesseract).  
+There are builds available [here](https://github.com/UB-Mannheim/tesseract/wiki).
+- Make sure this is installed to the default installation directory *(C:\Program Files\Tesseract-OCR)*.
 
 #### pyperclip
 - Windows
@@ -75,6 +62,7 @@ Install the requirements:
 
 ### Usage
 Run the program:  
+
     python3 driver.py
 
 I would recommend making a keyboard shortcut for this program. For example, I made a keyboard shortcut for `ctrl-shift-prtSc` which runs `python3 ~/path/to/copy-and-paste-anything/driver.py`  
