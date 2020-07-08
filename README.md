@@ -71,7 +71,7 @@ Install [tkinter](https://docs.python.org/3/library/tkinter.html "docs") for you
 ### Requirements
 Install the requirements:  
 
-    pip3 install -r requirements
+    pip3 install -r requirements.txt
 
 ### Usage
 Run the program:  
