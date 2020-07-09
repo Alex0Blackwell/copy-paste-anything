@@ -51,10 +51,13 @@ There are builds available [here](https://github.com/UB-Mannheim/tesseract/wiki)
 tkinter should come installed with Python, however, if it isn't you will have to install it.  
 Install [tkinter](https://docs.python.org/3/library/tkinter.html "docs") for your operating system:  
 **Debian:**
+
     sudo apt-get install python3-tk
 **Fedora**
+
     sudo dnf install python3-tkinter
 **Arch**
+
     sudo pacman -Syu tk
 **etc...**  
 
