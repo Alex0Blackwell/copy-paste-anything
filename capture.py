@@ -24,7 +24,6 @@ class Application():
         root.attributes("-alpha", 1)
         root.geometry('250x50+100+100')  # set window dimensions
         root.title('Copy')
-        root.iconbitmap('./.images/copy_paste_icon.ico')
         self.menu_frame = Frame(master, bg="#4a4a4a")
         self.menu_frame.pack(fill=BOTH, expand=YES)
 

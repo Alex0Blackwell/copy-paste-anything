@@ -1,4 +1,6 @@
-import cv2, pytesseract, os
+import cv2
+import pytesseract
+import os
 from PIL import Image
 
 
