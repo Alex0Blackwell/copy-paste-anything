@@ -15,11 +15,12 @@ class Application():
         """The constructor for Application class"""
         self.master = master
         self.x = self.y = 0
-        self.rect   = None
+        self.image = None
+        self.rect = None
         self.startX = None
         self.startY = None
-        self.curX   = None
-        self.curY   = None
+        self.curX = None
+        self.curY = None
 
         root.attributes("-alpha", 1)
         root.geometry('250x50+100+100')  # set window dimensions
@@ -51,8 +52,7 @@ class Application():
             width (int): The width.
             height (int): The height.
         """
-        im = pyautogui.screenshot(region=(left, top, width, height))
-        im.save(".capture.png")
+        self.image = pyautogui.screenshot(region=(left, top, width, height))
 
 
     def createScreenCanvas(self):
@@ -80,7 +80,7 @@ class Application():
         should be started.
 
         Parameters:
-            event: Bound to <ButonPress-1>.
+            event: Bound to <ButtonPress-1>.
         """
 
         # save mouse drag start position
@@ -120,19 +120,15 @@ class Application():
 
         self.snip(left, top, width, height)
 
-        self.text = convert.getText()
-
-        print("Text is:\n" + '-'*10)
-        print(self.text)
-        print('-'*10)
+        self.text = convert.get_text(self.image)
         try:
-            pyperclip.copy(self.text);
-            print("This has been copied to your clipboard")
+            pyperclip.copy(self.text)
         except Exception as e:
-            print("Sorry, the above text could not be copied to your clipboard")
-            raise
+            print("The text could not be copied to your clipboard.")
+            print(f'Text: "{self.text}"')
+            raise e
+        print(f'"{self.text}" has been copied to your clipboard.')
 
-        # let's end the program as soon as the text is copied to the clipboard
         self.exit_application()
 
 
