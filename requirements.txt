@@ -1,4 +1,3 @@
-opencv-python>=4.2.0.34
-PyAutoGUI>=0.9.50
-pyperclip>=1.8.0
-pytesseract>=0.3.4
+PyAutoGUI>=0.9.53
+pyperclip>=1.8.2
+pytesseract>=0.3.8
