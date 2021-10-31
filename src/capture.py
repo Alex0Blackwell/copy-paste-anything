@@ -12,9 +12,10 @@ class Application:
         master (Tk()): Required to start the tkinter GUI.
     """
 
-    def __init__(self, master):
-        """The constructor for Application class"""
-        self.master = master
+    def __init__(self, root, args):
+        """The constructor for the Application class"""
+        self.root = root
+        self.args = args
         self.x = self.y = 0
         self.image = None
         self.rect = None
@@ -23,10 +24,10 @@ class Application:
         self.curX = None
         self.curY = None
 
-        root.attributes("-alpha", 1)
-        root.geometry("250x50+100+100")  # set window dimensions
-        root.title("Copy")
-        self.menu_frame = Frame(master, bg="#4a4a4a")
+        self.root.attributes("-alpha", 1)
+        self.root.geometry("250x50+100+100")  # set window dimensions
+        self.root.title("Copy")
+        self.menu_frame = Frame(self.root, bg="#4a4a4a")
         self.menu_frame.pack(fill=BOTH, expand=YES)
 
         self.buttonBar = Frame(self.menu_frame, bg="#1f1f1f")
@@ -36,12 +37,12 @@ class Application:
             self.buttonBar,
             text="Clip",
             width=5,
-            command=self.createScreenCanvas,
+            command=self.snip_screen,
             background="#5a6778",
         )
         self.snipButton.pack(expand=YES)
 
-        self.master_screen = Toplevel(root)
+        self.master_screen = Toplevel(self.root)
         self.master_screen.withdraw()
         self.master_screen.attributes("-alpha", 0.8)
         self.picture_frame = Frame(self.master_screen, background="#8698b0")
@@ -59,11 +60,12 @@ class Application:
         """
         self.image = pyautogui.screenshot(region=(left, top, width, height))
 
-    def createScreenCanvas(self):
-        """The method to create the focused screen overlay and handle events."""
-
+    def snip_screen(self):
+        """
+        The method to create the focused screen overlay and handle events.
+        """
         self.master_screen.deiconify()
-        root.withdraw()
+        self.root.withdraw()
 
         self.screenCanvas = Canvas(self.picture_frame, cursor="cross", bg="#696969")
         self.screenCanvas.pack(fill=BOTH, expand=YES)
@@ -75,9 +77,9 @@ class Application:
         )  # left release
 
         self.master_screen.attributes("-fullscreen", True)
-        self.master_screen.attributes("-alpha", 0.2)
         self.master_screen.lift()
         self.master_screen.attributes("-topmost", True)
+        self.master_screen.attributes("-alpha", 0.1)
 
     def on_button_press(self, event):
         """
@@ -128,13 +130,16 @@ class Application:
         self.snip(left, top, width, height)
 
         self.text = convert.get_text(self.image)
-        try:
-            pyperclip.copy(self.text)
-        except Exception as e:
-            print("The text could not be copied to your clipboard.")
-            print(f'Text: "{self.text}"')
-            raise e
-        print(f'"{self.text}" has been copied to your clipboard.')
+        if not self.args.no_copy:
+            try:
+                pyperclip.copy(self.text)
+            except Exception as e:
+                print("The text could not be copied to your clipboard.")
+                print(f'Text: "{self.text}"')
+                raise e
+            print(f'"{self.text}" has been copied to your clipboard.')
+        else:
+            print(f'The text is: "{self.text}"')
 
         self.exit_application()
 
@@ -142,12 +147,8 @@ class Application:
         """Method to exit the selecting mode."""
         self.screenCanvas.destroy()
         self.master_screen.withdraw()
-        root.deiconify()
+        self.root.deiconify()
 
     def exit_application(self):
         """Method to end the application."""
-        root.quit()
-
-
-root = Tk()
-app = Application(root)
+        self.root.quit()
