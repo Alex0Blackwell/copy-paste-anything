@@ -16,5 +16,13 @@ run-no-copy:
 	$(info Starting Copy Paste Anything in no-copy mode)
 	python3 src/driver.py --no-copy
 
+run-simple:
+	$(info Starting Copy Paste Anything in simple GUI mode)
+	python3 src/driver.py --simple
+
+run-simple-no-copy:
+	$(info Starting Copy Paste Anything in simple GUI mode)
+	python3 src/driver.py --simple --no-copy
+
 help:
 	python3 src/driver.py --help

@@ -24,29 +24,33 @@ class Application:
         self.curX = None
         self.curY = None
 
-        self.root.attributes("-alpha", 1)
-        self.root.geometry("250x50+100+100")  # set window dimensions
-        self.root.title("Copy")
-        self.menu_frame = Frame(self.root, bg="#4a4a4a")
-        self.menu_frame.pack(fill=BOTH, expand=YES)
-
-        self.buttonBar = Frame(self.menu_frame, bg="#1f1f1f")
-        self.buttonBar.pack(fill=BOTH, expand=YES)
-
-        self.snipButton = Button(
-            self.buttonBar,
-            text="Clip",
-            width=5,
-            command=self.snip_screen,
-            background="#5a6778",
-        )
-        self.snipButton.pack(expand=YES)
-
         self.master_screen = Toplevel(self.root)
         self.master_screen.withdraw()
         self.master_screen.attributes("-alpha", 0.8)
         self.picture_frame = Frame(self.master_screen, background="#8698b0")
         self.picture_frame.pack(fill=BOTH, expand=YES)
+
+        if self.args.simple:
+            self.snip_screen()
+        else:
+            self.root.attributes("-alpha", 1)
+            self.root.geometry("250x50+100+100")  # set window dimensions
+            self.root.title("Copy")
+            self.menu_frame = Frame(self.root, bg="#4a4a4a")
+            self.menu_frame.pack(fill=BOTH, expand=YES)
+
+            self.buttonBar = Frame(self.menu_frame, bg="#1f1f1f")
+            self.buttonBar.pack(fill=BOTH, expand=YES)
+
+            self.snipButton = Button(
+                self.buttonBar,
+                text="Clip",
+                width=5,
+                command=self.snip_screen,
+                background="#5a6778",
+            )
+            self.snipButton.pack(expand=YES)
+
 
     def snip(self, left, top, width, height):
         """
@@ -59,7 +63,7 @@ class Application:
             height (int): The height.
         """
         self.image = pyautogui.screenshot(region=(left, top, width, height))
-
+    
     def snip_screen(self):
         """
         The method to create the focused screen overlay and handle events.
@@ -70,10 +74,10 @@ class Application:
         self.screenCanvas = Canvas(self.picture_frame, cursor="cross", bg="#696969")
         self.screenCanvas.pack(fill=BOTH, expand=YES)
 
-        self.screenCanvas.bind("<ButtonPress-1>", self.on_button_press)  # left click
+        self.screenCanvas.bind("<ButtonPress-1>", self.select_screen_area)  # left click
         self.screenCanvas.bind("<B1-Motion>", self.on_move_press)  # mouse drag
         self.screenCanvas.bind(
-            "<ButtonRelease-1>", self.on_button_release
+            "<ButtonRelease-1>", self.take_screen_shot_and_exit
         )  # left release
 
         self.master_screen.attributes("-fullscreen", True)
@@ -81,7 +85,7 @@ class Application:
         self.master_screen.attributes("-topmost", True)
         self.master_screen.attributes("-alpha", 0.1)
 
-    def on_button_press(self, event):
+    def select_screen_area(self, event):
         """
         The method for when the left mouse button is pressed and a selection
         should be started.
@@ -112,7 +116,7 @@ class Application:
             self.rect, self.startX, self.startY, self.curX, self.curY
         )
 
-    def on_button_release(self, event):
+    def take_screen_shot_and_exit(self, event):
         """
         The method after an area is selected and a screenshot must be taken.
 
@@ -121,6 +125,7 @@ class Application:
         """
 
         self.exitScreenshotMode()
+        self.exit_application()
 
         left = min(self.startX, self.curX)
         top = min(self.startY, self.curY)
@@ -141,7 +146,6 @@ class Application:
         else:
             print(f'The text is: "{self.text}"')
 
-        self.exit_application()
 
     def exitScreenshotMode(self):
         """Method to exit the selecting mode."""

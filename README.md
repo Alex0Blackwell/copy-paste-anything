@@ -98,7 +98,22 @@ Run the program and don't copy text to clipboard:
 make run-no-copy
 ```
 
-I would recommend making a keyboard shortcut for this program. For example, I made a keyboard shortcut for `ctrl-shift-prtSc`.  
+Run the program skipping the GUI button click and start selecting right away:
+```bash
+make run-simple
+```
+
+Run the program in simple mode and don't copy text to the clipboard:
+```bash
+make run-simple-no-copy
+```
+
+I would recommend making a keyboard shortcut for this program.
+For example, I made a keyboard shortcut for `ctrl-shift-prtSc`.  
+If your OS allows running Makefiles as shortcuts, try the following command:
+```
+make -C ~/your/path/to/copy-paste-anything/ run
+```
 
 ## License
 Licensed under the [GNU General Public License v3.0](LICENSE).

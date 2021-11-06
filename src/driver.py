@@ -12,6 +12,12 @@ def main():
         action="store_true",
         help="Disable automatically copying to the clipboard",
     )
+    parser.add_argument(
+        "-s",
+        "--simple",
+        action="store_true",
+        help="Start selecting an area of the screen right away",
+    )
     args = parser.parse_args()
 
     root = Tk()
